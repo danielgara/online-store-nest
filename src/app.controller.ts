@@ -16,10 +16,12 @@ export class AppController {
     let viewData = [];
     viewData["description"] = "This is an about page ...";
     viewData["author"] = "Developed by: Your Name";
+    let data1 = 'About us - Online Store';
     return { 
-      title: "About us - Online Store",
+      title: data1,
       subtitle: "About us",
       viewData: viewData
     };
+    
   }
 }
