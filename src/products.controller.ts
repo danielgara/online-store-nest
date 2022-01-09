@@ -1,10 +1,4 @@
-import {
-  Controller,
-  Get,
-  Render,
-  Param,
-  NotFoundException,
-} from '@nestjs/common';
+import { Controller, Get, Render, Param, NotFoundException } from '@nestjs/common';
 import { ProductsService } from './models/products.service';
 
 @Controller('/products')
