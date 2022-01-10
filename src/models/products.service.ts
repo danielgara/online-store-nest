@@ -18,7 +18,7 @@ export class ProductsService {
     return this.productsRepository.findOne(id);
   }
 
-  create(product: Product): Promise<Product> {
+  createOrUpdate(product: Product): Promise<Product> {
     return this.productsRepository.save(product);
   }
 
