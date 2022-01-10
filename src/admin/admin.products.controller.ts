@@ -21,11 +21,11 @@ export class AdminProductsController {
   }
 
   @Post('/store')
-  @UseInterceptors(FileInterceptor('image', { dest: "./public/uploads" }))
+  @UseInterceptors(FileInterceptor('image', { dest: './public/uploads' }))
   @Redirect('/admin/products')
   async store(
     @Body(new ValidationPipe()) createProductDto: CreateProductDto,
-    @UploadedFile() file: Express.Multer.File
+    @UploadedFile() file: Express.Multer.File,
   ) {
     const newProduct = new Product();
     newProduct.setName(createProductDto.name);
@@ -53,18 +53,18 @@ export class AdminProductsController {
   }
 
   @Post('/:id/update')
-  @UseInterceptors(FileInterceptor('image', { dest: "./public/uploads" }))
+  @UseInterceptors(FileInterceptor('image', { dest: './public/uploads' }))
   @Redirect('/admin/products')
   async upload(
     @Body(new ValidationPipe()) createProductDto: CreateProductDto,
     @Param('id') id: string,
-    @UploadedFile() file: Express.Multer.File
+    @UploadedFile() file: Express.Multer.File,
   ) {
     const product = await this.productsService.findOne(id);
     product.setName(createProductDto.name);
     product.setDescription(createProductDto.description);
     product.setPrice(createProductDto.price);
-    if(file){
+    if (file) {
       product.setImage(file.filename);
     }
     await this.productsService.createOrUpdate(product);

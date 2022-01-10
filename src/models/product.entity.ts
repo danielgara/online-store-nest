@@ -16,7 +16,7 @@ export class Product {
 
   @Column()
   price: number;
-  
+
   getId(): number {
     return this.id;
   }
