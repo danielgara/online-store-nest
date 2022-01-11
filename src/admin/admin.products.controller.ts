@@ -1,5 +1,15 @@
-import { Controller, Get, Render, Post, Body, Redirect, 
-  ValidationPipe, UseInterceptors, UploadedFile, Param } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Render,
+  Post,
+  Body,
+  Redirect,
+  ValidationPipe,
+  UseInterceptors,
+  UploadedFile,
+  Param,
+} from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { ProductsService } from '../models/products.service';
 import { Product } from '../models/product.entity';
