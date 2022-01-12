@@ -1,19 +1,8 @@
-import {
-  Controller,
-  Get,
-  Render,
-  Post,
-  Body,
-  Redirect,
-  ValidationPipe,
-  UseInterceptors,
-  UploadedFile,
-  Param,
-} from '@nestjs/common';
+import { Controller, Get, Render, Post, Body, Redirect,
+  UseInterceptors, UploadedFile, Param } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { ProductsService } from '../models/products.service';
 import { Product } from '../models/product.entity';
-import { CreateProductDto } from '../dto/create.product.dto';
 
 @Controller('/admin/products')
 export class AdminProductsController {
@@ -33,14 +22,11 @@ export class AdminProductsController {
   @Post('/store')
   @UseInterceptors(FileInterceptor('image', { dest: './public/uploads' }))
   @Redirect('/admin/products')
-  async store(
-    @Body(new ValidationPipe()) createProductDto: CreateProductDto,
-    @UploadedFile() file: Express.Multer.File,
-  ) {
+  async store(@Body() body, @UploadedFile() file: Express.Multer.File) {
     const newProduct = new Product();
-    newProduct.setName(createProductDto.name);
-    newProduct.setDescription(createProductDto.description);
-    newProduct.setPrice(createProductDto.price);
+    newProduct.setName(body.name);
+    newProduct.setDescription(body.description);
+    newProduct.setPrice(body.price);
     newProduct.setImage(file.filename);
     await this.productsService.createOrUpdate(newProduct);
   }
@@ -66,14 +52,14 @@ export class AdminProductsController {
   @UseInterceptors(FileInterceptor('image', { dest: './public/uploads' }))
   @Redirect('/admin/products')
   async upload(
-    @Body(new ValidationPipe()) createProductDto: CreateProductDto,
-    @Param('id') id: string,
+    @Body() body,
     @UploadedFile() file: Express.Multer.File,
+    @Param('id') id: string,
   ) {
     const product = await this.productsService.findOne(id);
-    product.setName(createProductDto.name);
-    product.setDescription(createProductDto.description);
-    product.setPrice(createProductDto.price);
+    product.setName(body.name);
+    product.setDescription(body.description);
+    product.setPrice(body.price);
     if (file) {
       product.setImage(file.filename);
     }

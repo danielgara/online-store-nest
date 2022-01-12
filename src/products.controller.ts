@@ -1,10 +1,4 @@
-import {
-  Controller,
-  Get,
-  Render,
-  Param,
-  NotFoundException,
-} from '@nestjs/common';
+import { Controller, Get, Render, Param, Res } from '@nestjs/common';
 import { ProductsService } from './models/products.service';
 
 @Controller('/products')
@@ -24,18 +18,15 @@ export class ProductsController {
   }
 
   @Get('/:id')
-  @Render('products/show')
-  async show(@Param() params) {
+  async show(@Param() params, @Res() response) {
     const product = await this.productsService.findOne(params.id);
     if (product === undefined) {
-      throw new NotFoundException('Product not found');
+      return response.redirect('/products');
     }
     const viewData = [];
     viewData['title'] = product.getName() + ' - Online Store';
     viewData['subtitle'] = product.getName() + ' - Product Information';
     viewData['product'] = product;
-    return {
-      viewData: viewData,
-    };
+    return response.render('products/show', { viewData: viewData });
   }
 }
