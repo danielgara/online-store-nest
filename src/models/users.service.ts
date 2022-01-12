@@ -17,7 +17,7 @@ export class UsersService {
     return this.usersRepository.save(user);
   }
 
-  async login(email: string, password:string): Promise<User> {
+  async login(email: string, password: string): Promise<User> {
     const user = await this.usersRepository.findOne({ email: email });
     if (user) {
       const isMatch = await bcrypt.compare(password, user.getPassword());
