@@ -47,5 +47,3 @@ export class CartController {
     request.session.products = null;
   }
 }
-
-  
