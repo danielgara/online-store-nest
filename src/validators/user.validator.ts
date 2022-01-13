@@ -13,7 +13,7 @@ export class UserValidator {
     }
 
     if (
-      toValidate.includes('password') && 
+      toValidate.includes('password') &&
       validator.isEmpty(body.password)
     ) {
       errors.push('Password cannot be empty');
