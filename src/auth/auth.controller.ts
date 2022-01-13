@@ -1,5 +1,13 @@
-import { Controller, Get, Render, Post, Redirect, Body,
-  Req, Res } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Render,
+  Post,
+  Redirect,
+  Body,
+  Req,
+  Res,
+} from '@nestjs/common';
 import { User } from 'src/models/user.entity';
 import { UsersService } from '../models/users.service';
 import { UserValidator } from '../validators/user.validator';

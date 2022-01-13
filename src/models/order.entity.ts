@@ -1,5 +1,11 @@
-import { Entity, Column, PrimaryGeneratedColumn, ManyToOne,
-  OneToMany, CreateDateColumn } from 'typeorm';
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  ManyToOne,
+  OneToMany,
+  CreateDateColumn,
+} from 'typeorm';
 import { User } from './user.entity';
 import { Item } from './item.entity';
 
@@ -17,7 +23,9 @@ export class Order {
   @ManyToOne(() => User, (user) => user.orders)
   user: User;
 
-  @OneToMany(() => Item, (item) => item.order)
+  @OneToMany(() => Item, (item) => item.order, {
+    cascade: ['insert'],
+  })
   items: Item[];
 
   getId(): number {

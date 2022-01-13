@@ -12,10 +12,7 @@ export class UserValidator {
       errors.push('Invalid Email format');
     }
 
-    if (
-      toValidate.includes('password') &&
-      validator.isEmpty(body.password)
-    ) {
+    if (toValidate.includes('password') && validator.isEmpty(body.password)) {
       errors.push('Password cannot be empty');
     }
 
